@@ -1,0 +1,16 @@
+#newForm{
+  display: none;
+  text-align: center;
+}
+
+#buttons{
+  text-align: center;
+}
+
+table.center {
+    display:none;
+    text-align:center;
+}
+body{
+  text-align: center;
+}
