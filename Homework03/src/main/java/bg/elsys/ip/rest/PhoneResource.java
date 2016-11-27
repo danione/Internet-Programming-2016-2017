@@ -25,10 +25,17 @@ public class PhoneResource {
 	}
 
 	@POST
-	@ApiOperation(value = "add new phone", response = Phone.class)
+	@ApiOperation(value = "add new phone", response = Phone.class, responseContainer = "Status")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPhone(Phone phone) {
+		
+		for(Phone ph : PhoneService.getInstance().getPhones()) {
+            if(ph.getId() == phone.getId())
+            {
+            	return Response.serverError().status(Status.CONFLICT).build();
+            }
+		}
 		PhoneService.getInstance().addPhone(phone);
 		return Response.ok(phone).status(Status.CREATED).build();
 	}

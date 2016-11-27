@@ -14,3 +14,20 @@ table.center {
 body{
   text-align: center;
 }
+
+#filter_form{
+    text-align: center;
+    display: none;
+}
+
+#filter_check{
+  text-align: center;
+}
+
+#min_price, #max_price{
+  display: none;
+}
+
+#min_storage, #max_storage{
+  display: none;
+}
