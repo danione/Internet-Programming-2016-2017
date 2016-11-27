@@ -211,10 +211,6 @@ $(document).ready(function() {
 			higherPrice: max_price
 		});
 
-		window.alert(developer + " " + model);
-
-		window.alert(filter);
-
 		$.post({
 			type: 'POST',
 			url: 'http://localhost:8081/rst/api/filter',
@@ -244,27 +240,39 @@ $(document).ready(function() {
 
 	$("#Submit").click(function(){
 
-		var phone = JSON.stringify({
-			id: parseInt($('input[name=id]').val()),
-			developer: $('input[name=developer]').val(),
-			model: $('input[name=model]').val(),
-			storage: $('input[name=storage]').val(),
-			price: $('input[name=price]').val()
-		});
+		if(!$('input[name=id]').val() ||
+			 !$('input[name=developer]').val() ||
+		   !$('input[name=model]').val() ||
+		 	 !$('input[name=storage]').val() ||
+		   !$('input[name=price]').val())
+		{
+			window.alert("Enter the required fields");
+		}
+		else
+		{
+			var phone = JSON.stringify({
+				id: parseInt($('input[name=id]').val()),
+				developer: $('input[name=developer]').val(),
+				model: $('input[name=model]').val(),
+				storage: $('input[name=storage]').val(),
+				price: $('input[name=price]').val()
+			});
 
-		$.post({
-			type: 'POST',
-			url: 'http://localhost:8081/rst/api/phones',
-			dataType: 'json',
-			contentType:'application/json',
-			data: phone,
-			success: function(data){
-				console.log(data);
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-				window.alert(jqXHR.status + " " + textStatus);
-			}
-		});
+			$.post({
+				type: 'POST',
+				url: 'http://localhost:8081/rst/api/phones',
+				dataType: 'json',
+				contentType:'application/json',
+				data: phone,
+				success: function(data){
+					console.log(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					window.alert(jqXHR.status + " " + textStatus);
+				}
+			});
+		}
+
 
 
 	});
